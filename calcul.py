@@ -175,29 +175,30 @@ def main():
 
 
      if st.button("Export to XLSX"):
-         # Create a dictionary with the results
-         results = {
-             "Débit unitaire": [debit_unitaire],
-             "Surface unitaire": [round(surface_unitaire, 1)],
-             "Vitesse de filtration avec n-1 filtres": [round(Vitesse_n1, 1)],
-             "Vitesse de filtration avec n-2 filtres": [round(Vitesse_n2, 1)],
-             # Include other results...
-         }
+    # Create a dictionary with the results
+    results = {
+        "Débit unitaire": [debit_unitaire],
+        "Surface unitaire": [round(surface_unitaire, 1)],
+        "Vitesse de filtration avec n-1 filtres": [round(Vitesse_n1, 1)],
+        "Vitesse de filtration avec n-2 filtres": [round(Vitesse_n2, 1)],
+        # Include other results...
+    }
 
-         # Create a Pandas DataFrame from the results
-         df = pd.DataFrame(results)
-         writer = pd.ExcelWriter("results.xlsx", engine="xlsxwriter")
+    # Create a Pandas DataFrame from the results
+    df = pd.DataFrame(results)
+    writer = pd.ExcelWriter("results.xlsx", engine="xlsxwriter")
 
-         # Export the DataFrame to XLSX
-         df.to_excel("results.xlsx", index=False)
-         st.success("Results exported to results.xlsx")     
+    # Export the DataFrame to XLSX
+    df.to_excel(writer, sheet_name="Results", index=False)
+    writer.save()
+    st.success("Results exported to results.xlsx")
 
-         st.download_button(
-             label="Download Results (XLSX)",
-             data="./results.xlsx",
-             file_name="results.xlsx",
-             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-         )
+    st.download_button(
+        label="Download Results (XLSX)",
+        data="./results.xlsx",
+        file_name="results.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 if __name__ == "__main__":
     main()
