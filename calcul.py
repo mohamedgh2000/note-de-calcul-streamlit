@@ -148,34 +148,26 @@ def main():
         st.write("Nombre de buslures total :", Nombre_de_buslures_total)
 
 
- #fourth input
-    Vitesse_de_lavage_eau= st.number_input("Vitesse de lavage eau")
-    Vitesse_de_lavage_air= st.number_input("Vitesse de lavage air")
-
-     
-
+ Vitesse_de_lavage_eau = st.number_input("Vitesse de lavage eau")
+    Vitesse_de_lavage_air = st.number_input("Vitesse de lavage air")
 
     #calcul 5
-
-    Debit_lavage_eau=Superficie_uni*Vitesse_de_lavage_eau
-    Débit_lavage_air=Superficie_uni*Vitesse_de_lavage_air
+    Debit_lavage_eau = Superficie_uni * Vitesse_de_lavage_eau
+    Débit_lavage_air = Superficie_uni * Vitesse_de_lavage_air
 
     if Débit_lavage_air != 0:
         largeur_canal = Debit_lavage_eau / Débit_lavage_air
     else:
         largeur_canal = None
-    
+
     st.header("Résultat")
-    if None not in [Debit_lavage_eau,Superficie_uni,Vitesse_de_lavage_eau,Débit_lavage_air]:
+    if None not in [Debit_lavage_eau, Superficie_uni, Vitesse_de_lavage_eau, Débit_lavage_air]:
         st.write("Débit de lavage eau:", Debit_lavage_eau)
-        st.write("Débit de lavage air :", Débit_lavage_air)
+        st.write("Débit de lavage air:", Débit_lavage_air)
         st.write("Largeur canal de reprise eau de lavage:", largeur_canal)
 
-
-
-
-     if st.button("Export to XLSX"):
-    # Create a dictionary with the results
+    if st.button("Export to XLSX"):
+        # Create a dictionary with the results
         results = {
             "Débit unitaire": [debit_unitaire],
             "Surface unitaire": [round(surface_unitaire, 1)],
@@ -184,11 +176,11 @@ def main():
             # Include other results...
         }
 
-    # Create a Pandas DataFrame from the results
+        # Create a Pandas DataFrame from the results
         df = pd.DataFrame(results)
         writer = pd.ExcelWriter("results.xlsx", engine="xlsxwriter")
 
-    # Export the DataFrame to XLSX
+        # Export the DataFrame to XLSX
         df.to_excel(writer, sheet_name="Results", index=False)
         writer.save()
         st.success("Results exported to results.xlsx")
