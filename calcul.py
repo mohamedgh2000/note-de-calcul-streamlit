@@ -148,7 +148,7 @@ def main():
         st.write("Nombre de buslures total :", Nombre_de_buslures_total)
 
 
- Vitesse_de_lavage_eau = st.number_input("Vitesse de lavage eau")
+    Vitesse_de_lavage_eau = st.number_input("Vitesse de lavage eau")
     Vitesse_de_lavage_air = st.number_input("Vitesse de lavage air")
 
     #calcul 5
